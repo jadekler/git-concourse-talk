@@ -73,7 +73,7 @@ We will need to set up a concourse web VM and a concourse worker VM
         
         sudo concourse worker \
           --work-dir /opt/concourse/worker \
-          --tsa-host ec2-12-34-56-78.us-west-2.compute.amazonaws.com \
+          --tsa-host 127.0.0.1 \
           --tsa-public-key host_key.pub \
           --tsa-worker-private-key worker_key &
         ```
