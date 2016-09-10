@@ -46,7 +46,7 @@ We will need to set up a concourse web VM and a concourse worker VM
         ssh-keygen -t rsa -f session_signing_key -N ''
         cp worker_key.pub authorized_worker_keys
         
-        wget https://github.com/concourse/concourse/releases/download/v1.3.1/concourse_linux_amd64
+        wget https://github.com/concourse/concourse/releases/download/v2.1.0/concourse_linux_amd64
         chmod a+x concourse_linux_amd64
         sudo mv concourse_linux_amd64 /usr/local/bin/concourse
         concourse web \
@@ -59,6 +59,7 @@ We will need to set up a concourse web VM and a concourse worker VM
           --external-url http://ec2-12-34-56-78.us-west-2.compute.amazonaws.com:8080 &
         ```
 1. Navigate to `http://ec2-12-34-56-78.us-west-2.compute.amazonaws.com:8080` in your browser
+    - Page not loading? Remember to update your security groups
 
 ##### Set up the concourse worker
 
