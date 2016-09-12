@@ -1,0 +1,74 @@
+resources:
+  - name: my-app
+    type: git
+    source:
+      uri: git@github.com:jadekler/git-concourse-talk.git
+      branch: master
+
+  - name: my-s3-bucket
+    type: s3
+    source:
+      bucket: releases
+      regexp: directory_on_s3/release-(.*).tgz
+      access_key_id: ACCESS-KEY
+      secret_access_key: SECRET
+
+jobs:
+  - name: tests
+    plan:
+      - get: my-app
+      - task: run-tests
+        config:
+          platform: linux
+
+          image_resource:
+            type: docker-image
+            source:
+              repository: golang
+              tag: '1.6'
+
+          outputs:
+          - name: some-output
+
+          run:
+            path: sh
+            args:
+            - -exc
+            - |
+              whoami
+              env
+              go version
+              find .
+              touch some-output/my-built-artifact
+
+  - name: upload-to-s3
+    plan:
+      - get: my-app
+        trigger: true
+        passed: [tests]
+      - task: tar-it-up
+        config:
+          platform: linux
+
+          image_resource:
+            type: docker-image
+            source:
+              repository: golang
+              tag: '1.6'
+
+          outputs:
+          - name: some-output
+
+          run:
+            path: sh
+            args:
+            - -exc
+            - |
+              cd /var/vcap/resources/my-app
+              GOOS=linux go build
+              tar -cvzf main.tgz main
+
+      - put: my-s3-bucket
+        params:
+          file: /var/vcap/resources/my-app/main.tgz
+          acl: public-read
