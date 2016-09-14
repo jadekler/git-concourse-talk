@@ -1,6 +1,10 @@
 # git-concourse-talk
 Concourse talk.
 
+# Concourse for iOS
+
+See [this great PivotalGuides post](http://pivotal-guides.cfapps.io/frameworks/ios/ios-ci-concourse/)
+
 # Concourse for AWS
 
 ## Installing concourse
@@ -97,7 +101,3 @@ We will need to set up a concourse web VM and a concourse worker VM
 1. `fly -t concourse set-pipeline -p my-pipeline -c pipeline.yml`
 1. `fly -t concourse unpause-pipeline -p my-pipeline`
 1. Navigate to http://ec2-12-34-56-78.us-west-2.compute.amazonaws.com:8080/pipelines/hello to see your pipeline!
-
-# Concourse for iOS
-
-See [this great PivotalGuides post](http://pivotal-guides.cfapps.io/frameworks/ios/ios-ci-concourse/)
