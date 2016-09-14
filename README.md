@@ -1,6 +1,9 @@
 # git-concourse-talk
 Concourse talk.
 
+NOTE: Pipelines are all valid, but neither the code provided in this repo nor the pipeline scripts are fully
+ fleshed out. Do not expect jobs to be green when run!
+
 # Concourse for iOS
 
 See [this great PivotalGuides post](http://pivotal-guides.cfapps.io/frameworks/ios/ios-ci-concourse/)
